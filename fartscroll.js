@@ -67,7 +67,15 @@ var fartscroll = (function () {
   }
 
   function getPlayer() {
-    var container = getContainer(), player;
+    var container = getContainer(), player, i
+      , players = container.getElementsByTagName("audio");
+
+    for(i in players){
+      player = players[i];
+      if (player.currentTime === 0 || player.ended) {
+        return player;
+      }
+    }
     player = document.createElement("audio");
     container.appendChild(player);
     return player;
